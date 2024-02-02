@@ -14,9 +14,7 @@ permissions:
 
 jobs:
   build:
-
     runs-on: ubuntu-latest
-    environment: Python test env
     steps:
     - uses: actions/checkout@v3
     
@@ -37,5 +35,8 @@ jobs:
         poetry install
         
     - name: Test with pytest
+      env:
+        MET_CLIENT_ID: ${{ secrets.MET_CLIENT_ID }}
+        MET_CLIENT_SECRET: ${{ secrets.MET_CLIENT_SECRET }}
       run: |
         poetry run pytest
